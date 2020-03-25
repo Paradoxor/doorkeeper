@@ -5,7 +5,7 @@ require "spec_helper"
 describe Doorkeeper::OAuth::RefreshTokenRequest do
   let(:server) do
     double :server,
-           access_token_expires_in: 2.minutes
+           access_token_expires_in: ->(resource_owner_id = nil) { 2.minutes }
   end
 
   let(:refresh_token) do
