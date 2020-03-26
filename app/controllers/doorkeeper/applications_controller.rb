@@ -8,7 +8,7 @@ module Doorkeeper
     before_action :set_application, only: %i[show edit update destroy]
 
     def index
-      @applications = Application.ordered_by(:created_at)
+      @applications = Doorkeeper.config.application_model.ordered_by(:created_at)
 
       respond_to do |format|
         format.html
@@ -24,15 +24,15 @@ module Doorkeeper
     end
 
     def new
-      @application = Application.new
+      @application = Doorkeeper.config.application_model.new
     end
 
     def create
-      @application = Application.new(application_params)
+      @application = Doorkeeper.config.application_model.new(application_params)
 
       if @application.save
         flash[:notice] = I18n.t(:notice, scope: %i[doorkeeper flash applications create])
-        flash[:application_secret] = @application.secret
+        flash[:application_secret] = @application.plaintext_secret
 
         respond_to do |format|
           format.html { redirect_to oauth_application_url(@application) }
@@ -84,7 +84,7 @@ module Doorkeeper
     private
 
     def set_application
-      @application = Application.find(params[:id])
+      @application = Doorkeeper.config.application_model.find(params[:id])
     end
 
     def application_params

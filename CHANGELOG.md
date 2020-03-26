@@ -6,14 +6,14 @@ upgrade guides.
 User-visible changes worth mentioning.
 
 ## master
-
-- [#1354] Add option to authorize the calling user to access an application.
+- [#1366] Sets expiry of token generated using `refresh_token` to that of original token. (Fixes #1364) 
+- [#1354] Add `authorize_resource_owner_for_client` option to authorize the calling user to access an application.
 - [#1355] Allow to enable polymorphic Resource Owner association for Access Token & Grant
   models (`use_polymorphic_resource_owner` configuration option).
   
   **[IMPORTANT]** Review your custom patches or extensions for Doorkeeper internals if you
   have such - since now Doorkeeper passes Resource Owner instance to every objects and not
-  just it's ID. More info could be found in GitHub PR description.
+  just it's ID. See PR description for details.
   
 - [#1356] Remove duplicated scopes from Access Tokens and Grants on attribute assignment.
 - [#1357] Fix `Doorkeeper::OAuth::PreAuthorization#as_json` method causing 
@@ -22,6 +22,16 @@ User-visible changes worth mentioning.
 - [#1359] Refactor Doorkeeper configuration options DSL to make it easy to reuse it
   in external extensions.
 - [#1360] Increase `matching_token_for` lookup size to 10 000 and make it configurable.
+- [#1371] Fix controllers to use valid classes in case Doorkeeper has custom models configured.
+- [#1370] Fix revocation response for invalid token and unauthorized requests to conform with RFC 7009 (fixes #1362).
+
+  **[IMPORTANT]** now fully according to RFC 7009 nobody can do a revocation request without `client_id`
+  (for public clients) and `client_secret` (for private clients). Please update your apps to include that
+  info in the revocation request payload.
+  
+- [#1373] Make Doorkeeper routes mapper reusable in extensions.
+
+- [#1374] Revoke and issue client credentials token in a transaction with a row lock.
 
 ## 5.3.1
 
