@@ -113,7 +113,7 @@ These applications show how Doorkeeper works and how to integrate with it. Start
 
 | Application | Link |
 | :--- | :--- |
-| oAuth2 Server with Doorkeeper | [doorkeeper-gem/doorkeeper-provider-app](https://github.com/doorkeeper-gem/doorkeeper-provider-app) |
+| OAuth2 Server with Doorkeeper | [doorkeeper-gem/doorkeeper-provider-app](https://github.com/doorkeeper-gem/doorkeeper-provider-app) |
 | Sinatra Client connected to Provider App | [doorkeeper-gem/doorkeeper-sinatra-client](https://github.com/doorkeeper-gem/doorkeeper-sinatra-client) |
 | Devise + Omniauth Client | [doorkeeper-gem/doorkeeper-devise-client](https://github.com/doorkeeper-gem/doorkeeper-devise-client) |
 
@@ -160,6 +160,9 @@ tests with a specific Rails version:
 BUNDLE_GEMFILE=gemfiles/rails_6_0.gemfile bundle exec rake
 ```
 
+You can also experiment with the changes using `bin/console`. It uses in-memory SQLite database and default
+Doorkeeper config, but you can reestablish connection or reconfigure the gem if you need.
+
 ## Contributing
 
 Want to contribute and don't know where to start? Check out [features we're
@@ -168,8 +171,7 @@ create [example
 apps](https://github.com/doorkeeper-gem/doorkeeper/wiki/Example-Applications),
 integrate the gem with your app and let us know!
 
-Also, check out our [contributing guidelines
-page](https://github.com/doorkeeper-gem/doorkeeper/wiki/Contributing).
+Also, check out our [contributing guidelines page](CONTRIBUTING.md).
 
 ## Contributors
 
